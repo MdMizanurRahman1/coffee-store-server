@@ -28,6 +28,18 @@ async function run() {
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
 
+        //post:3 then node mongodb crud->usage examples->insert operstions->insert a document
+
+        const coffeeCollection = client.db('coffeeDB').collection('coffee');
+
+        //post:1 first server side e post korte hobe then go back to client side
+        app.post('/coffee', async (req, res) => {
+            const newCoffee = req.body;
+            console.log(newCoffee);
+            //post:4 
+            const result = await coffeeCollection.insertOne(newCoffee);
+            res.send(result)
+        })
 
 
 
