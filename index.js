@@ -32,6 +32,13 @@ async function run() {
 
         const coffeeCollection = client.db('coffeeDB').collection('coffee');
 
+        // CRUD=Read=Get ...this is get option only to the server side
+        app.get('/coffee', async (req, res) => {
+            const cursor = coffeeCollection.find();
+            const result = await cursor.toArray();
+            res.send(result);
+        })
+
         //post:1 first server side e post korte hobe then go back to client side
         app.post('/coffee', async (req, res) => {
             const newCoffee = req.body;
